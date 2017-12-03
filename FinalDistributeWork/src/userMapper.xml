@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="distuibuteWork.dao.UserDao">
+    <!--  <resultMap id="BaseResultMap" type="distuibuteWork.pojo.User">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="pwd" property="pwd" jdbcType="VARCHAR"/>
+        <result column="account" property="account" jdbcType="VARCHAR"/>
+        <result column="tel" property="tel" jdbcType="VARCHAR"/>
+        <result column="address" property="address" jdbcType="VARCHAR"/>
+        <result column="sex" property="sex" jdbcType="INTEGER"/>
+        <result column="age" property="age" jdbcType="INTEGER"/>
+        <result column="uteach" property="uteach" jdbcType="INTEGER"/>
+        <result column="uclass" property="uclass" jdbcType="INTEGER"/>
+    </resultMap>   -->
+    
+    
+    <resultMap id="AdminResultMap" type="distuibuteWork.pojo.Admin">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="pwd" property="pwd" jdbcType="VARCHAR"/>
+        <result column="lastlogintime" property="lastlogintime" jdbcType="VARCHAR"/>
+    </resultMap>
+<!-- 
+     <select id="userLogin" resultMap="BaseResultMap" parameterType="distuibuteWork.pojo.User">
+        select  id  from user where account = #{account} and pwd = #{pwd}
+    </select> 
+    
+    <select id="countUser" resultType="HashMap">
+        SELECT COUNT(id) countUser FROM user  
+    </select> -->
+    
+    
+
+
+    <select id="adminLogin"  parameterType="distuibuteWork.pojo.Admin" resultMap="AdminResultMap" >
+        SELECT lastlogintime FROM admin WHERE name=#{name} and pwd=#{pwd}
+    </select>
+    <update id="setTime">
+		update admin
+		<set>
+			lastlogintime=#{format}
+		</set>
+		where name='admin'
+	</update>
+    
+	
+	
+	
+
+</mapper>

@@ -1,3 +1,10 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%response.setCharacterEncoding("UTF-8");
+  
+%>
+<!DOCTYPE html>
 <html lang="zh">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -10,18 +17,12 @@
 <title>器械检测</title>
 <!--pickers css-->
 <link rel="stylesheet" type="text/css"
-	href="js/bootstrap-datepicker/css/datepicker-custom.css" />
-<link rel="stylesheet" type="text/css"
-	href="js/bootstrap-timepicker/css/timepicker.css" />
+	href="../js/bootstrap-datepicker/css/datepicker-custom.css" />
 
-<link href="css/style.css" rel="stylesheet">
-<link href="css/style-responsive.css" rel="stylesheet">
-<script src="js/jquery-1.10.2.min.js"></script>
-<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-<!--[if lt IE 9]>
-  <script src="js/html5shiv.js"></script>
-  <script src="js/respond.min.js"></script>
-  <![endif]-->
+
+<link href="../css/style.css" rel="stylesheet">
+<link href="../css/style-responsive.css" rel="stylesheet">
+<script src="../js/jquery-1.10.2.min.js"></script>
 <script>
  $(document).ready(
 		 function(){
@@ -29,7 +30,9 @@
 	   
 	   $("#Mlcid").val(mlcid);
 	   $("#Mlcid").text(mlcid);
-	   alert("mlcid"+mlcid)
+	   /* alert("mlcid"+mlcid) */
+	   /* var c = $("#Mlcid").attr("value");
+	   alert(c); */
 	}
 		 )
 	
@@ -47,7 +50,7 @@
 	 strDate = "0" + strDate;
 	 }
 	 var currentdate = date.getFullYear().toString()+month.toString()+ strDate.toString() + date.getHours().toString()+date.getMinutes().toString()+date.getSeconds().toString();
-     alert("currentdate"+currentdate);
+     /* alert("currentdate"+currentdate); */
      return currentdate;
 	 }
 
@@ -305,22 +308,22 @@
 							报修单详细 </header>
 						<div data-brackets-id="534" class="panel-body">
 
-							<form data-brackets-id="535" class="form-horizontal adminex-form"
-								method="post">
+							<form id="checkform" data-brackets-id="535" class="form-horizontal adminex-form"
+								method="post" action="<c:url value="/mlcmanagement/addMlchek.html"/>" enctype="multipart/form-data" >
 								<div data-brackets-id="561" class="form-group">
 									<label data-brackets-id="562"
-										class="col-sm-2 col-sm-2 control-label">检测单号</label>
+										class="col-sm-2 col-sm-2 control-label">检测计划单号</label>
 									<div data-brackets-id="563" class="col-sm-10">
-									<!-- 在type后面有一个 placeholder="该处由系统生成 -->
+									<!-- 在type后面有一个 placeholder="该处由系统生成disabled="" -->
 										<input data-brackets-id="564" class="form-control"
 											id="Mlcid" name="Mlcid" type="text" 
-											disabled="">
+											>
 									</div>
 								</div>
 
 								<div data-brackets-id="536" class="form-group">
 									<label data-brackets-id="537"
-										class="col-sm-2 col-sm-2 control-label">检测名称</label>
+										class="col-sm-2 col-sm-2 control-label">检测计划名称</label>
 									<div data-brackets-id="538" class="col-sm-10">
 										<input data-brackets-id="539" type="text" class="form-control"id="Mlcname" name="Mlcname">
 
@@ -332,7 +335,7 @@
 
 								<div data-brackets-id="536" class="form-group">
 									<label data-brackets-id="537"
-										class="col-sm-2 col-sm-2 control-label">器械名称</label>
+										class="col-sm-2 col-sm-2 control-label">被检测器械名称</label>
 									<div data-brackets-id="538" class="col-sm-4">
 										<input data-brackets-id="539" type="text" class="form-control" id="Mlcproname" name="Mlcproname">
 									</div>
@@ -350,7 +353,7 @@
 
 								<div data-brackets-id="536" class="form-group">
 									<label data-brackets-id="537"
-										class="col-sm-2 col-sm-2 control-label">器械数量</label>
+										class="col-sm-2 col-sm-2 control-label">被检测器械数量</label>
 									<div data-brackets-id="538" class="col-sm-10">
 										<input data-brackets-id="539" type="text" id="Mlcpronum" name="Mlcpronum"
 											class="form-control round-input"> <span
@@ -366,7 +369,7 @@
 									<label data-brackets-id="641"
 										class="col-sm-2 control-label col-lg-2" for="inputSuccess">检测类型</label>
 									<div data-brackets-id="642" class="col-lg-10">
-										<select data-brackets-id="643" class="form-control m-bot15">
+										<select data-brackets-id="643" class="form-control m-bot15" name="Mlctype">
 											<option data-brackets-id="644" name="Mlctype" id="Mlctype1" value=1>普通检测</option>
 											<option data-brackets-id="645" name="Mlctype" id="Mlctype2" value=2>特殊检测</option>
 											<option data-brackets-id="646" name="Mlctype" id="Mlctype3" value=3>精度检测</option>
@@ -379,12 +382,12 @@
 
 
 								<div class="form-group">
-									<label class="control-label col-md-2">预定开始日期</label>
+									<label class="control-label col-md-2">开始日期</label>
 									<div class="col-md-4 col-xs-11">
 
 										<div data-date-viewmode="years" data-date-format="dd-mm-yyyy"
 											data-date="12-02-2012" class="input-append date dpYears">
-											<input type="text" readonly="" value="12-02-2012" size="16"
+											<input type="text" readonly="" value="12-02-2012" size="16" name="Mlcbtime" id="Mlcbtime"
 												class="form-control"> <span
 												class="input-group-btn add-on">
 												<button class="btn btn-primary" type="button">
@@ -394,12 +397,12 @@
 										</div>
 										<span class="help-block">选择工作日</span>
 									</div>
-									<label class="control-label col-md-2">预定結束日期</label>
+									<label class="control-label col-md-2">結束日期</label>
 									<div class="col-md-4 col-xs-11">
 
 										<div data-date-viewmode="years" data-date-format="dd-mm-yyyy"
 											data-date="12-02-2012" class="input-append date dpYears">
-											<input type="text" readonly="" value="12-02-2012" size="16"
+											<input type="text" readonly="" value="12-02-2012" size="16" name="Mlcetime" id="Mlcetime"
 												class="form-control"> <span
 												class="input-group-btn add-on">
 												<button class="btn btn-primary" type="button">
@@ -413,13 +416,13 @@
 
 								<div data-brackets-id="640" class="form-group">
 									<label data-brackets-id="641"
-										class="col-sm-2 control-label col-lg-2" for="inputSuccess">维修人员</label>
+										class="col-sm-2 control-label col-lg-2" for="inputSuccess">检测人员</label>
 									<div data-brackets-id="642" class="col-lg-10">
-										<select data-brackets-id="643" class="form-control m-bot15">
-											<option data-brackets-id="644">唐朝</option>
-											<option data-brackets-id="645">唐朝2</option>
-											<option data-brackets-id="646">唐朝3</option>
-											<option data-brackets-id="647">唐朝4</option>
+										<select data-brackets-id="643" class="form-control m-bot15" name="Mlcperson">
+											<option data-brackets-id="644" name="Mlcperson" id="Mlctyperson1" value="唐朝1">唐朝</option>
+											<option data-brackets-id="645" name="Mlcperson" id="Mlctyperson2" value="唐朝2">唐朝2</option>
+											<option data-brackets-id="646" name="Mlcperson" id="Mlctyperson3" value="唐朝3">唐朝3</option>
+											<option data-brackets-id="647" name="Mlcperson" id="Mlctyperson4" value="唐朝4">唐朝4</option>
 
 										</select>
 
@@ -428,52 +431,29 @@
 
 								<div data-brackets-id="536" class="form-group">
 									<label data-brackets-id="537"
-										class="col-sm-2 col-sm-2 control-label">联系方式</label>
+										class="col-sm-2 col-sm-2 control-label">检测标准</label>
 									<div data-brackets-id="538" class="col-sm-10">
-										<input data-brackets-id="539" type="text" class="form-control">
+										<input data-brackets-id="539" type="text" class="form-control" name="Mlcrmark" id="Mlcramrk" >
 									</div>
 								</div>
 
-								<div data-brackets-id="536" class="form-group">
-									<label data-brackets-id="537"
-										class="col-sm-2 col-sm-2 control-label">维修人员联系方式</label>
-									<div data-brackets-id="538" class="col-sm-10">
-										<input data-brackets-id="539" type="text" class="form-control">
-										<span data-brackets-id="544" class="help-block">该处为经理填写</span>
-									</div>
-								</div>
+							
 
 
 								<header data-brackets-id="782" class="panel-heading">
-									填写损坏状况 </header>
+									填写检测方法 </header>
 								<div data-brackets-id="783" class="panel-body">
-									<form data-brackets-id="784" method="get"
-										class="form-horizontal bucket-form">
+									
 										<div data-brackets-id="785" class="form-group">
 											<label data-brackets-id="786" class="col-sm-2 control-label">请尽可能详细</label>
 											<div data-brackets-id="787" class="col-sm-10">
-												<textarea data-brackets-id="788" rows="6"
+												<textarea data-brackets-id="788" rows="6" name="Mlcway" id="Mlcway" 
 													class="form-control"></textarea>
 											</div>
 										</div>
-									</form>
+									
 								</div>
-								<div class="form-group">
-									<header data-brackets-id="782" class="panel-heading">
-										填写维修状况 </header>
-									<div data-brackets-id="783" class="panel-body">
-										<form data-brackets-id="784" method="get"
-											class="form-horizontal bucket-form">
-											<div data-brackets-id="785" class="form-group">
-												<label data-brackets-id="786" class="col-sm-2 control-label">请尽可能详细</label>
-												<div data-brackets-id="787" class="col-sm-10">
-													<textarea data-brackets-id="788" rows="6"
-														class="form-control"></textarea>
-												</div>
-											</div>
-										</form>
-									</div>
-								</div>
+								
 
 								<div class="form-group">
 									<div class="col-lg-offset-2 col-lg-10">
@@ -504,33 +484,24 @@
 	</section>
 
 	<!-- Placed js at the end of the document so the pages load faster -->
-	<script src="js/jquery-1.10.2.min.js"></script>
-	<script src="js/jquery-ui-1.9.2.custom.min.js"></script>
-	<script src="js/jquery-migrate-1.2.1.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-	<script src="js/modernizr.min.js"></script>
-	<script src="js/jquery.nicescroll.js"></script>
+	
+	<script src="../js/jquery-ui-1.9.2.custom.min.js"></script>
+	<script src="../js/jquery-migrate-1.2.1.min.js"></script>
+	<script src="../js/bootstrap.min.js"></script>
+	<script src="../js/modernizr.min.js"></script>
+	<script src="../js/jquery.nicescroll.js"></script>
 
 	<!--pickers plugins-->
 	<script type="text/javascript"
-		src="js/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
-	<script type="text/javascript"
-		src="js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
-	<script type="text/javascript"
-		src="js/bootstrap-daterangepicker/moment.min.js"></script>
-	<script type="text/javascript"
-		src="js/bootstrap-daterangepicker/daterangepicker.js"></script>
-	<script type="text/javascript"
-		src="js/bootstrap-colorpicker/js/bootstrap-colorpicker.js"></script>
-	<script type="text/javascript"
-		src="js/bootstrap-timepicker/js/bootstrap-timepicker.js"></script>
+		src="../js/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+	
 
 	<!--pickers initialization-->
-	<script src="js/pickers-init.js"></script>
+	<script src="../js/pickers-init.js"></script>
 
 
 	<!--common scripts for all pages-->
-	<script src="js/scripts.js"></script>
+	<script src="../js/scripts.js"></script>
 
 </body>
 </html>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="distuibuteWork.dao.MLcheckdao">
+<resultMap id="MlcheckMap" type="distuibuteWork.pojo.MLcheck">
+        <id column="mlcid" property="id" jdbcType="VARCHAR"/>
+        <result column="mlcname" property="mlcname" jdbcType="VARCHAR"/>
+        <result column="mlcplace" property="mlcplace" jdbcType="VARCHAR"/>
+        <result column="mlcproname" property="mlcproname" jdbcType="VARCHAR"/>
+        <result column="mlcpronum" property="mlcpronum" jdbcType="INTEGER"/>
+        <result column="mlctype" property="mlctype" jdbcType="VARCHAR"/>
+        <result column="mlcbtime" property="mlcbtime" jdbcType="VARCHAR"/>
+        <result column="mlcbtime" property="mlcbtime" jdbcType="VARCHAR"/>
+        <result column="mlcprerson" property="mlcprerson" jdbcType="VARCHAR"/>
+        <result column="mlcrmark" property="mlcrmark" jdbcType="VARCHAR"/>
+        <result column="mlcway" property="mlcway" jdbcType="VARCHAR"/>  
+        <result column="mlcprocess" property="mlcprocess" jdbcType="INTEGER"/>    
+    </resultMap>
+    
+  <resultMap id="MlcheckLink" type="distuibuteWork.pojo.MlcLink">
+        <id column="mlcid" property="mlcid" jdbcType="VARCHAR"/>
+         <result column="mlcresid" property="mlcresid" jdbcType="VARCHAR"/>
+         <result column="mlcslutionid" property="mlcslutionid" jdbcType="VARCHAR"/>
+         <result column="mlcprocess" property="mlcprocess" jdbcType="VARCHAR"/>
+    </resultMap> 
+
+<insert id="addmlCheck">
+  insert into mlcheck (mlcid,mlcname,mlcplace,mlcproname,mlctype,mlcpronum,mlcbtime,mlcetime,mlcperson,mlcrmark,mlcway,mlcprocess)
+  values              (#{mlcid},#{mlcname},#{mlcplace},#{mlcproname},#{mlctype},#{mlcpronum},#{mlcbtime},#{mlcetime},#{mlcperson},#{mlcrmark},#{mlcway},#{mlcprocess})
+</insert>
+
+<insert id="linkAdd">
+  insert into mlclink (mlcid)
+  values              (#{mlcid})
+</insert>
+
+
+
+</mapper>

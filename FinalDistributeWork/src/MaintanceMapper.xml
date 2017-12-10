@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="distuibuteWork.dao.Maintancedao" >
+  <resultMap id="BaseResultMap" type="distuibuteWork.pojo.SmTConserveplan" >
+    <id column="conserve_id" property="conserveId" jdbcType="VARCHAR" />
+    <result column="conserve_name" property="conserveName" jdbcType="VARCHAR" />
+    <result column="conserve_type" property="conserveType" jdbcType="INTEGER" />
+    <result column="conserve_method" property="conserveMethod" jdbcType="VARCHAR" />
+    <result column="comment_information" property="commentInformation" jdbcType="VARCHAR" />
+    <result column="operate_person" property="operatePerson" jdbcType="VARCHAR" />
+    <result column="start_time" property="startTime" jdbcType="DATE" />
+    <result column="end_time" property="endTime" jdbcType="DATE" />
+    <result column="pro_name" property="proName" jdbcType="VARCHAR" />
+    <result column="pro_num" property="proNum" jdbcType="INTEGER" />
+    <result column="place" property="place" jdbcType="VARCHAR" />
+     <result column="conserve_result" property="result" jdbcType="VARCHAR" />
+     <result column="process" property="process" jdbcType="INTEGER" />
+  </resultMap>
+  
+  
+   <insert id="addMM" parameterType="distuibuteWork.pojo.SmTConserveplan" >
+    insert into sm_t_conserveplan (conserve_id, conserve_name, conserve_type, 
+      conserve_method,  operate_person, 
+      start_time, end_time, pro_name, 
+      pro_num, place)
+    values (#{conserveId,jdbcType=VARCHAR}, #{conserveName,jdbcType=VARCHAR}, #{conserveType,jdbcType=INTEGER}, 
+      #{conserveMethod,jdbcType=VARCHAR},  #{operatePerson,jdbcType=VARCHAR}, 
+      #{startTime,jdbcType=DATE}, #{endTime,jdbcType=DATE}, #{proName,jdbcType=VARCHAR}, 
+      #{proNum,jdbcType=INTEGER}, #{place,jdbcType=VARCHAR})
+  </insert>
+  
+  
+   <select id="getMM" resultMap="BaseResultMap" parameterType="distuibuteWork.pojo.SmTConserveplan">
+        SELECT * FROM sm_t_conserveplan where operate_person = (#{mperson}) 
+  </select>
+  
+ 
+
+ 
+ 	<select id="getMMbyid" resultMap="BaseResultMap" parameterType="distuibuteWork.pojo.SmTConserveplan">
+        SELECT * FROM sm_t_conserveplan WHERE conserve_id=(#{mmid}) 
+  </select>
+	
+ 
+  <update id="updateRes" parameterType="distuibuteWork.pojo.SmTConserveplan"><!-- 这里有问题 -->
+		update sm_t_conserveplan
+		<set>
+		    conserve_result=#{mmres},
+		    process=#{process}
+		</set>
+		where conserve_id=#{mmid}
+	</update>
+  
+   <select id="getMMres" resultMap="BaseResultMap" parameterType="distuibuteWork.pojo.SmTConserveplan">
+        SELECT * FROM sm_t_conserveplan where process= (#{process}) 
+  </select>
+  
+ 
+  
+</mapper> 
